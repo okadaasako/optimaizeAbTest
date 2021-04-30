@@ -1,0 +1,14 @@
+.firstTitle {
+  font-size: 40px;
+}
+.abWrapper {
+  max-width: 648px;
+  text-align: center;
+  margin: auto;
+}
+.abBlock {
+  background: red;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
