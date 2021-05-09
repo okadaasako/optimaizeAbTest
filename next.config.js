@@ -1,3 +1,3 @@
 module.exports = {
-  assetPrefix: '/index',
+  assetPrefix: '/repository-name',
 };
