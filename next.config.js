@@ -1,5 +1,5 @@
 require('dotenv').config();
 
 module.exports = {
-  assetPrefix: process.env.GITHUB_PAGES ? '/optimaizeAbTest/index' : '',
+  assetPrefix: process.env.GITHUB_PAGES ? '/optimaizeAbTest/' : '',
 };
