@@ -8,32 +8,59 @@
 
 name: Deno
 
+# masterブランチにプッシュしたときjobsに記述した操作を行う
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches:
+    - master
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }} # runs a test on Ubuntu, Windows and macOS
-
-    strategy:
-      matrix:
-        deno: ["v1.x", "nightly"]
-        os: [macOS-latest, windows-latest, ubuntu-latest]
-
+  build-deploy:
+    # ubuntu OS を仮想マシン上に用意する
+    runs-on: ubuntu-18.04
     steps:
-      - name: Setup repo
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Setup Deno
-        uses: denolib/setup-deno@c7d7968ad4a59c159a777f79adddad6872ee8d96
-        with:
-          deno-version: ${{ matrix.deno }} # tests across multiple Deno versions
+    # Node.js環境のセットアップを行う
+    - name: setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
 
-      - name: Cache Dependencies
-        run: deno cache deps.ts
+    # npm install の際にキャッシュを使うよう設定
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
-      - name: Run Tests
-        run: deno test -A --unstable
+    # package.jsonに基づき依存パッケージをインストールする
+    - name: install
+      run: npm install --frozen-lockfile
+
+    # Next.jsアプリをビルドする
+    # プロジェクトルート直下に.nextディレクトリができる
+    - name: build
+      run: npm run build
+
+    # 静的なHTMLとしてNext.jsアプリを生成する
+    # プロジェクトルート直下にoutディレクトリができる
+    # そのなかに、HTMLファイル群と、それらが読み込むJSファイル群を収めた_nextディレクトリがある
+    - name: export
+      run: npm run export
+
+    # しかしGitHub Pagesの仕様として_から始まるディレクトリが見えず404となる
+    # つまりHTMLからJSを読み込めない
+    # これを回避するために.nojekyllファイルをoutディレクトリに作る
+    - name: add nojekyll
+      run: touch ./out/.nojekyll
+
+    # gh-pagesブランチにoutディレクトリの中身をプッシュする
+    # gh-pagesブランチは自動的に作成される
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./out
