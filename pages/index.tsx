@@ -13,7 +13,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.ImageBlock}>
-          <Image
+          <img
             src="/images/profile.svg"
             width={144}
             height={144}
