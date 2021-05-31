@@ -26,7 +26,7 @@
 // };
 
 export const GA_TRACKING_ID = "UA-198248763-1";
-
+export const OPT_TRACKING_ID = "OPT-PF3GZMK";
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url) => {
