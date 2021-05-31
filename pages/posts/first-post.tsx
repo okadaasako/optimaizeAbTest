@@ -15,7 +15,7 @@ export default function FirstPost() {
           <p>ABテストで下記を変える</p>
           <div className={styled.abBlock}></div>
           <h2>
-            <Link href="/">
+            <Link href="/optimaizeAbTest/">
               <a>Back to home</a>
             </Link>
           </h2>

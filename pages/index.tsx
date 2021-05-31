@@ -8,13 +8,13 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>Create Next Appテスト</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="./favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <div className={styles.ImageBlock}>
           <img
-            src="/images/profile.svg"
+            src="./images/profile.svg"
             width={144}
             height={144}
             alt="Your Name"
@@ -22,7 +22,7 @@ export default function Home() {
         </div>
         <h1 className={styles.title}>ABテスト用！</h1>
         <div className={styles.pageNext}>
-          <Link href="/posts/first-post">
+          <Link href="./posts/first-post">
             <a>this page!</a>
           </Link>
         </div>
@@ -35,7 +35,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          <img src="./vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
