@@ -36,7 +36,7 @@ export default function Home() {
         </div>
         <h1 className={styles.title}>ABテスト用！</h1>
         <div className={styles.pageNext}>
-          <Link href="./posts/first-post">
+          <Link href="../posts/first-post">
             <a>this page!</a>
           </Link>
         </div>
