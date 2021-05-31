@@ -1,19 +1,14 @@
 import '../styles/globals.css'
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import * as gtag from "../lib/gtag";
+const handleRouteChange = (url: string) => {
+  gtag.pageview(url);
+};
+
+// ルートの変化が完了したときに発火
+Router.events.on("routeChangeComplete", handleRouteChange);
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      gtag.pageview(url);
-    };
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
   return <Component {...pageProps} />
 }
 
