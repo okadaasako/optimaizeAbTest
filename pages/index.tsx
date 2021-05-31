@@ -2,8 +2,22 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
+declare const window: Window["window"] & {
+  dataLayer: object[];
+};
 
 export default function Home() {
+  const router = useRouter();
+  const pathName = router.pathname;
+
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "optimize.activate" });
+  }, [pathName]);
+
   return (
     <div className={styles.container}>
       <Head>
