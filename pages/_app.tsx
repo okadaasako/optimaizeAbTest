@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import * as gtag from "../lib/gtag";
 import { useEffect } from "react";
 
-// Router.events.on("routeChangeComplete", handleRouteChange);
-
 declare const window: Window["window"] & {
   dataLayer: object[];
 };
@@ -12,12 +10,9 @@ declare const window: Window["window"] & {
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
+  const pathName = router.pathname;
 
   useEffect(() => {
-    // if (!gtag.existsGaId) {
-    //   return
-    // }
-
     const handleRouteChange = (url: string) => {
       gtag.pageview(url)
     }
@@ -29,10 +24,7 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
 
-  const pathName = router.pathname;
-
   useEffect(() => {
-    console.log(window.dataLayer);
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: "optimize.activate" });
   }, [pathName]);

@@ -3,12 +3,6 @@ import Head from 'next/head'
 import Layout from '../../components/layout'
 // moduleを付けないとcssモジュールとして読み込んでくれない！
 import styled from '../../styles/FirstPost.module.css'
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-
-declare const window: Window["window"] & {
-  dataLayer: object[];
-};
 
 export default function FirstPost() {
   return (
