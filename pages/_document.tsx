@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { GA_TRACKING_ID, OPT_TRACKING_ID } from '../lib/gtag'
+import { GA_TRACKING_ID } from '../lib/gtag'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -11,7 +11,7 @@ class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
-          {GA_TRACKING_ID && (
+          {/* {GA_TRACKING_ID && ( */}
             <>
               <script async={true} src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
               <script dangerouslySetInnerHTML={{
@@ -24,9 +24,9 @@ class MyDocument extends Document {
                 });`,
                 }}
               />
-              <script src={`https://www.googleoptimize.com/optimize.js?id=${OPT_TRACKING_ID}`}></script>
+              {/* <script src={`https://www.googleoptimize.com/optimize.js?id=${OPT_TRACKING_ID}`}></script> */}
             </>
-          )}
+          {/* )} */}
         </Head>
         <body>
           <Main />
