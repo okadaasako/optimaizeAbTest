@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
 
+  // ここに全ページ共通で行う処理
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: "optimize.activate" });
