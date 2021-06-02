@@ -11,14 +11,6 @@ declare const window: Window["window"] & {
 };
 
 export default function FirstPost() {
-  const router = useRouter();
-  const pathName = router.pathname;
-
-  useEffect(() => {
-    console.log(window.dataLayer);
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: "optimize.activate" });
-  }, [pathName]);
   return (
     <Layout>
       <Head>

@@ -5,6 +5,10 @@ import { useEffect } from "react";
 
 // Router.events.on("routeChangeComplete", handleRouteChange);
 
+declare const window: Window["window"] & {
+  dataLayer: object[];
+};
+
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
@@ -24,6 +28,14 @@ function MyApp({ Component, pageProps }) {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
+
+  const pathName = router.pathname;
+
+  useEffect(() => {
+    console.log(window.dataLayer);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "optimize.activate" });
+  }, [pathName]);
 
   return <Component {...pageProps} />
 }
