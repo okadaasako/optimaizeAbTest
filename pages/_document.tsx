@@ -11,6 +11,7 @@ class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
+        {/* GA_TRACKING_IDがあればスクリプトを呼び出す記述 */}
           {GA_TRACKING_ID && (
             <>
               <script async={true} src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
