@@ -1,14 +1,28 @@
 import '../styles/globals.css'
 import Router from "next/router";
 import * as gtag from "../lib/gtag";
-const handleRouteChange = (url: string) => {
-  gtag.pageview(url);
-};
+import { useEffect } from "react";
 
-// ルートの変化が完了したときに発火
-Router.events.on("routeChangeComplete", handleRouteChange);
+// Router.events.on("routeChangeComplete", handleRouteChange);
 
 function MyApp({ Component, pageProps }) {
+
+  useEffect(() => {
+    // if (!gtag.existsGaId) {
+    //   return
+    // }
+
+    const handleRouteChange = (path) => {
+      gtag.pageview(path)
+    }
+
+    // ルートの変化が完了したときに発火
+    Router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      Router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [Router.events])
+
   return <Component {...pageProps} />
 }
 
