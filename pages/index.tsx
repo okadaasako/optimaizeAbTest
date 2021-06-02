@@ -14,6 +14,7 @@ export default function Home() {
   const pathName = router.pathname;
 
   useEffect(() => {
+    console.log(window.dataLayer);
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: "optimize.activate" });
   }, [pathName]);
