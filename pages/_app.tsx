@@ -4,7 +4,7 @@ import * as gtag from "../lib/gtag";
 import { useEffect } from "react";
 
 declare const window: Window["window"] & {
-  dataLayer: object[];
+  dataLayer: {[key: string]: any};
 };
 
 function MyApp({ Component, pageProps }) {
